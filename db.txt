@@ -1,0 +1,10 @@
+2 tables:
+
+1) users
+uid,email, password, address
+
+2) Catalogue
+pid, name, dstart, dfinish, tstart, tfinish, number, price, desc
+
+3) Cart
+uid, pid, number
