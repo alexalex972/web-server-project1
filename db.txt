@@ -8,3 +8,8 @@ pid, name, dstart, dfinish, tstart, tfinish, number, price, desc
 
 3) Cart
 uid, pid, number
+
+
+#####Please check wheter dbtest.php works correctly
+
+#####Mysql user-> user, password -> test
