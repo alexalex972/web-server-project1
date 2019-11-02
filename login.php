@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +11,7 @@ session_start();
 <?php
 	require_once('inc/jumbotron.php');
     require_once('inc/nav.php');
-    require_once('inc/registration_form.php')
+    require_once('inc/login_script.php')
 ?>
 </body>
 </html> 
