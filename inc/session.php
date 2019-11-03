@@ -13,10 +13,10 @@ try {
     // Storing Session
     $email_check = $_SESSION['login_user'];
     // SQL Query To Fetch Complete Information Of User
-    $query = "SELECT id from users where email = '$email_check'";
+    $query = "SELECT uid from users where email = '$email_check'";
     $ses_sql = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($ses_sql);
-    $login_session = $row['id'];
+    $login_session = $row['uid'];
 
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();

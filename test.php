@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +16,7 @@
 <?php
 	require_once('inc/jumbotron.php');
 	require_once('inc/nav.php');
+	var_dump($_SESSION);
 ?>
 </body>
 </html> 

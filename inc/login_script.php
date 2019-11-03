@@ -18,20 +18,19 @@ if (isset($_POST['submit'])) {
          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
          $email = $_POST['email'];
-         $password = md5($_POST['password']);
+         $password = $_POST['password'];
 
-         $query = "SELECT email, password from users where email=? AND password=? LIMIT 1";
+         $query = "SELECT uid, email, password from users where email=? AND password=? LIMIT 1";
 
          $stmt = $conn->prepare($query);
          $stmt->bindParam(1, $email);
          $stmt->bindParam(2, $password);
          $stmt->execute();
-         if ($stmt->fetch(PDO::FETCH_ASSOC))
-            // Initializing Session
-            $_SESSION['login_user'] = $email;
+         if ($arr = $stmt->fetch(PDO::FETCH_ASSOC))
+            $_SESSION['login_user'] = $arr['uid'];
+
 
          header("location: index.php");
-
       } catch (PDOException $e) {
          echo "Connection failed: " . $e->getMessage();
       }
