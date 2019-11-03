@@ -7,11 +7,7 @@ function test_input($data) {
     return $data;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "trainsystem";
-
+require_once('auth/auth.php');
 try {
     // Create connection to db
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -55,7 +51,7 @@ try {
     }
 
     // Check if email is already in use
-    $sql = "SELECT * FROM users WHERE email = '$email'";
+    $sql = "SELECT * FROM Users WHERE email = '$email'";
     $duplicateEmailQuery = $conn->query($sql);
     
     if( $duplicateEmailQuery->rowCount()!=0 ){
@@ -64,7 +60,7 @@ try {
 
     // Register user
     if ( $duplicateEmailQuery->rowCount() == 0 && !empty($password) && !empty($passwordRepeat) && !empty($email) && !empty($address) && ($password == $passwordRepeat) ) {
-        $sql = "INSERT INTO users (email, password, address) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO Users (email, password, address) VALUES (?, ?, ?)";
 
         $statement = $conn->prepare($sql);
         $statement->bindValue(1, $email);

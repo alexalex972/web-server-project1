@@ -1,10 +1,5 @@
 <?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "trainsystem";
-
+require_once('auth/auth.php');
 session_start();
 $error = '';
 if (isset($_POST['submit'])) {
