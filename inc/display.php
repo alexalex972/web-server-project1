@@ -11,10 +11,7 @@
 		<th>Description</th>
 	</tr>
 	<?php
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "trainsystem";
+	require_once('auth/auth.php');
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$sql = $conn->prepare("SELECT * FROM Catalogue");
 	$sql->execute();
