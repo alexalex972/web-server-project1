@@ -1,23 +1,27 @@
 <table class='table-striped table-hover'>
-<tr>
-	<th>Id</th>
-	<th>Name</th>
-	<th>From</th>
-	<th>To</th>
-	<th>Departure time</th>
-	<th>Arrival time</th>
-	<th>Number of tockets left</th>
-	<th>Price</th>
-	<th>Description</th>
-</tr>
-<?php
-	$conn=new PDO("mysql:host=db;dbname=trainsystem", 'user', 'test');
-	$sql=$conn->prepare("SELECT * FROM Catalogue");
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>From</th>
+		<th>To</th>
+		<th>Departure time</th>
+		<th>Arrival time</th>
+		<th>Number of tockets left</th>
+		<th>Price</th>
+		<th>Description</th>
+	</tr>
+	<?php
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "trainsystem";
+	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+	$sql = $conn->prepare("SELECT * FROM Catalogue");
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
-	$data=$sql->fetchAll();
-	foreach($data as $i)
-echo<<<"CAT"
+	$data = $sql->fetchAll();
+	foreach ($data as $i)
+		echo <<<"CAT"
 	<tr>
 		<td>$i[pid]</td>
 		<td>$i[name]</td>
@@ -30,5 +34,5 @@ echo<<<"CAT"
 		<td>$i[desc]</td>
 	</tr>
 CAT;
-?>
+	?>
 </table>

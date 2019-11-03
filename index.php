@@ -15,6 +15,7 @@ session_start();
 <?php
 	require_once('inc/jumbotron.php');
 	require_once('inc/nav.php');
+	require_once('inc/display.php');
 ?>
 </body>
 </html> 

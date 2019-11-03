@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
          $email = $_POST['email'];
-         $password = $_POST['password'];
+         $password = md5($_POST['password']);
 
          $query = "SELECT email, password from users where email=? AND password=? LIMIT 1";
 
