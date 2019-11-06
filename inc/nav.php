@@ -11,6 +11,8 @@
     {
 		echo "<ul class='navbar-nav'>";
 		echo "<li class='nav-item'><a class='nav-link' href='index.php'>Home</a></li>";
+		echo "<li class='nav-item'><a class='nav-link' href='addtocart.php'>Buy</a></li>";
+		echo "<li class='nav-item'><a class='nav-link' href='cart.php'>Cart</a></li>";
 		echo "</ul>";
 		echo "<ul class='navbar-nav ml-auto'>";
 		echo "<li class='nav-item'><a class='nav-link'>Hello, " . $_SESSION['login_user'] . "</a></li>";

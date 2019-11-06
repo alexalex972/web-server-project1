@@ -1,4 +1,4 @@
-<form action='addfunc.php' method='POST'>
+<form action='inc/addfunc.php' method='POST'>
 <table class='table-striped table-hover'>
 <tr>
 	<th>Id</th>
@@ -12,7 +12,8 @@
 	<th>Description</th>
 </tr>
 <?php
-	$conn=new PDO("mysql:host=db;dbname=trainsystem", 'user', 'test');
+require_once('auth/auth.php');
+	$conn=new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$sql=$conn->prepare("SELECT * FROM Catalogue");
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -21,6 +22,7 @@
 	foreach($data as $i)
 echo<<<"CAT"
 	<tr>
+		<label>
 		<td>$i[pid]</td>
 		<td>$i[name]</td>
 		<td>$i[dstart]</td>
@@ -31,10 +33,12 @@ echo<<<"CAT"
 		<td>$i[price]</td>
 		<td>$i[desc]</td>
 		<td>$i[desc]</td>
-		<td><input type='checkbox' name='field$fc' value='$i[pid]'></td>
+		<td><input type='radio' name='field$fc' value='$i[pid]'></td>
+		</label>
 	</tr>
 CAT;
 ?>
 </table>
+<input type='text' name='number' placeholder='input number of tickets'>
 <input type='Submit' value='Add to cart'>
 </form>
