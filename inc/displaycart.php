@@ -11,15 +11,17 @@
 	<th>Description</th>
 </tr>
 <?php
-	session_start();
-	$conn=new PDO("mysql:host=db;dbname=trainsystem", 'user', 'test');
+require_once('auth/auth.php');
+	$conn=new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$sql=$conn->prepare("SELECT * 
 FROM Cart INNER JOIN Catalogue ON(Cart.pid = Catalogue.pid) WHERE Cart.uid = ?");
 	$sql->bindValue(1,$_SESSION['login_user']);
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
 	$data=$sql->fetchAll();
-	foreach($data as $i)
+	$total=0;
+	foreach($data as $i){
+		$total+=$i['price'];
 echo<<<"CAT"
 	<tr>
 		<td>$i[pid]</td>
@@ -33,5 +35,13 @@ echo<<<"CAT"
 		<td>$i[desc]</td>
 	</tr>
 CAT;
+	}
 ?>
 </table>
+<button onclick="myFunction()">Buy now</button>
+
+<script>
+function myFunction() {
+confirm("Are you sure you want to buy it?");
+}
+</script>
