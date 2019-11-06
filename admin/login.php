@@ -21,14 +21,24 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<div id="login">
-    <h2>Login Form</h2>
-    <form action="" method="post">
-        <label>Email :</label>
-        <input id="name" name="email" placeholder="email" type="text">
-        <label>Password :</label>
-        <input id="password" name="password" placeholder="**********" type="password"><br><br>
-        <input name="submit" type="submit" value=" Login ">
-        <span><?php echo $error; ?></span>
-    </form>
-</div>
+<head>
+	<title>Trains</title>
+	<meta charset="utf-8">
+	<?php
+	require_once('../inc/head.php');
+	?>
+</head>
+
+<form action="" method="post">
+   <div style="margin: 0 auto; max-width: 500px; margin-top: 50px; margin-bottom: 5px;">
+      <table class="form-group">
+         <label>Username :</label>
+         <input id="name" class="form-control" name="email" placeholder="username" type="text">
+         <label style="margin-top: .5rem;">Password :</label>
+         <input id="password" style="margin-bottom: 1rem;" class="form-control" name="password" placeholder="**********" type="password">
+         <div align="center"><input name="submit" class="btn btn-secondary" type="submit" value="Login"></div>
+         <span><?php echo $error; ?></span>
+      </table>
+   </div>
+</form>
+

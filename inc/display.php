@@ -1,4 +1,4 @@
-<table class='table-striped table-hover'>
+<table class='table table-hover table-striped '>
 	<tr>
 		<th>Id </th>
 		<th>Name </th>
@@ -9,6 +9,11 @@
 		<th># of tickets left </th>
 		<th>Price </th>
 		<th>Description </th>
+		<?php
+		if (isset($_SESSION['login_admin'])) {
+			echo "<th></th>";
+		}
+		?>
 	</tr>
 	<?php
 	require_once('auth/auth.php');

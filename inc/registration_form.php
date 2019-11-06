@@ -1,6 +1,7 @@
 <?php
 
-function test_input($data) {
+function test_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -46,63 +47,67 @@ try {
     }
 
     // Check if passwords match
-    if ( (!empty($password) && !empty($passwordRepeat)) && ($password != $passwordRepeat) ) {
+    if ((!empty($password) && !empty($passwordRepeat)) && ($password != $passwordRepeat)) {
         $passwordRepeatErr = "Passwords must match.";
     }
 
     // Check if email is already in use
     $sql = "SELECT * FROM Users WHERE email = '$email'";
     $duplicateEmailQuery = $conn->query($sql);
-    
-    if( $duplicateEmailQuery->rowCount()!=0 ){
+
+    if ($duplicateEmailQuery->rowCount() != 0) {
         $emailErr = 'Email already in use';
     }
 
     // Register user
-    if ( $duplicateEmailQuery->rowCount() == 0 && !empty($password) && !empty($passwordRepeat) && !empty($email) && !empty($address) && ($password == $passwordRepeat) ) {
+    if ($duplicateEmailQuery->rowCount() == 0 && !empty($password) && !empty($passwordRepeat) && !empty($email) && !empty($address) && ($password == $passwordRepeat)) {
         $sql = "INSERT INTO Users (email, password, address) VALUES (?, ?, ?)";
 
         $statement = $conn->prepare($sql);
         $statement->bindValue(1, $email);
         $statement->bindvalue(2, md5($password));
         $statement->bindValue(3, $address);
-        
+
         $statement->execute();
         $conn = null;
     }
 
     $conn = null;
-
-    } 
-catch(PDOException $e) 
-    {
+} catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
-    }
+}
 
 $conn = null;
 ?>
 
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <table>
+<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <table class="form-group" style="margin: 0 auto; min-width: 500px; margin-top: 50px; margin-bottom: 25px;">
         <tr>
             <td>Email:</td>
-            <td><input type="email" name="email" class="textInput"><span><?php echo $emailErr; ?></span></td>
+        </tr>
+        <tr>
+            <td><input type="email" class="form-control" name="email" class="textInput"><span><?php echo $emailErr; ?></span></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="password" name="password" class="textInput"><span><?php echo $passwordErr; ?></span></td>
         </tr>
         <tr>
-            <td>Password again::</td>
-            <td><input type="password" name="password_repeat" class="textInput"><span><?php echo $passwordRepeatErr; ?></span></td>
+            <td><input type="password" class="form-control" name="password" class="textInput"><span><?php echo $passwordErr; ?></span></td>
+        </tr>
+        <tr>
+            <td>Password again:</td>
+        </tr>
+        <tr>
+            <td><input type="password" class="form-control" name="password_repeat" class="textInput"><span><?php echo $passwordRepeatErr; ?></span></td>
         </tr>
         <tr>
             <td>Address:</td>
-            <td><input type="text" name="address" class="textInput"><span><?php echo $addressErr; ?></span></td>
         </tr>
         <tr>
-            <td></td>
-            <td><input type="submit" name="register_btn" class="textInput"></td>
+            <td><input type="text" class="form-control" name="address" class="textInput"><span><?php echo $addressErr; ?></span></td>
+        </tr>
+        <tr>
+            <td align="center"><input  style="margin-top: 15px" type="submit" name="register_btn" class="textInput btn btn-secondary"></td>
         </tr>
     </table>
 </form>

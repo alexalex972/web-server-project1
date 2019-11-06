@@ -6,21 +6,21 @@ $sql = $conn->prepare("SELECT * FROM Catalogue where pid='" . $id . "'");
 $sql->execute();
 $sql->setFetchMode(PDO::FETCH_ASSOC);
 $data = $sql->fetchAll();
-if($data) $data = $data[0];
+if ($data) $data = $data[0];
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Update Record</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <?php
+    require_once('inc/head.php');
+    ?>
 </head>
 
-<body>
-    <div class="form">
-        <h1>Update Record</h1>
+<body style="background-color: gainsboro">
+    <div class="form" style="max-width: 500px; 
+    margin: 0 auto;">
         <?php
         $status = "";
         if (isset($_POST['new']) && $_POST['new'] == 1) {
@@ -38,33 +38,43 @@ if($data) $data = $data[0];
             `desc`='" . $desc . "' WHERE pid='" . $id . "'";
 
             $conn->query($update);
-            if($conn->query($update)){
+            if ($conn->query($update)) {
 
                 $status = "Record Updated Successfully. </br></br>
                 <a href='index.php'>View Updated Record</a>";
-                            echo '<p style="color:#FF0000;">' . $status . '</p>';
-            } 
-
-           
+                echo '<p style="color: green; margin-top:30px">' . $status . '</p>';
+            }
         } else {
-            ?>
-            <div>
-                <form name="form" method="post" action="">
+            ?> <h1 align="center" style="margin-top: 20px">UPDATE RECORD #<?php echo $data['pid']; ?></h1>
+            <hr class="my-4">
+            <form name="form" method="post" action="">
+                <div class="form-group" style="margin: 0 auto">
                     <input type="hidden" name="new" value="1" />
                     <input name="id" type="hidden" value="<?php echo $data['pid']; ?>" />
-                    <p><input type="text" name="name" placeholder="Name" required value="<?php echo $data['name']; ?>" /></p>
-                    <p><input type="text" name="dstart" placeholder="From" required value="<?php echo $data['dstart']; ?>" /></p>
-                    <p><input type="text" name="dfinish" placeholder="To" required value="<?php echo $data['dfinish']; ?>" /></p>
-                    <p><input type="text" name="tstart" placeholder="Departure Time" required value="<?php echo $data['tstart']; ?>" /></p>
-                    <p><input type="text" name="tfinish" placeholder="Arrival time" required value="<?php echo $data['tfinish']; ?>" /></p>
-                    <p><input type="text" name="number" placeholder="Number of Tickets" required value="<?php echo $data['number']; ?>" /></p>
-                    <p><input type="text" name="price" placeholder="Price" required value="<?php echo $data['price']; ?>" /></p>
-                    <p><input type="text" name="desc" placeholder="Description" required value="<?php echo $data['desc']; ?>" /></p>
-                    <p><input name="submit" type="submit" value="Update" /></p>
-                </form>
+                    <label>Name:</label>
+                    <p><input type="text" class="form-control" name="name" placeholder="Name" required value="<?php echo $data['name']; ?>" /></p>
+                    <label>From:</label>
+                    <p><input type="text" class="form-control" name="dstart" placeholder="From" required value="<?php echo $data['dstart']; ?>" /></p>
+                    <label>To:</label>
+                    <p><input type="text" class="form-control" name="dfinish" placeholder="To" required value="<?php echo $data['dfinish']; ?>" /></p>
+                    <label>Departure Time:</label>
+                    <p><input type="datetime-local" class="form-control" name="tstart" placeholder="Departure Time" required value="<?php echo $data['tstart']; ?>" /></p>
+                    <label>Arrival time:</label>
+                    <p><input type="datetime-local" class="form-control" name="tfinish" placeholder="Arrival time" required value="<?php echo $data['tfinish']; ?>" /></p>
+                    <label>Number of Tickets Left:</label>
+                    <p><input type="number" class="form-control" name="number" placeholder="Number of Tickets" required value="<?php echo $data['number']; ?>" /></p>
+                    <label>Price:</label>
+                    <p><input type="number" class="form-control" name="price" placeholder="Price" required value="<?php echo $data['price']; ?>" /></p>
+                    <label>Description:</label>
+                    <p><input type="text" class="form-control" name="desc" placeholder="Description" required value="<?php echo $data['desc']; ?>" /></p>
+                    <p><input name="submit" class="form-control btn btn-secondary" type="submit" value="Update" /></p>
+                </div>
+            </form>
+            <p><button onclick="history.go(-1);" name="back" class="form-control btn btn-secondary">Back</button>
             <?php } ?>
-            </div>
     </div>
+    <hr class="my-4" style="background-color: white">
+    <p align="center" style="margin-top: 3px;">Web Server Technologies &copy; 2019 | <a href="">Alex</a> x <a href="">Azim</a> x <a href="">Lyubo</a> | All rights reserved &reg;</p>
 </body>
 
 </html>
