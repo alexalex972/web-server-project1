@@ -1,5 +1,7 @@
 <?php
-require_once('../inc/logout.php');
+if (session_status() != PHP_SESSION_NONE) {
+   session_destroy();
+}
 require_once('auth/auth.php');
 session_start();
 $error = '';

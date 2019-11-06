@@ -1,5 +1,7 @@
 <?php
-require_once('../inc/logout.php');
+if (session_status() != PHP_SESSION_NONE) {
+    session_destroy();
+}
 session_start();
 $error = '';
 if (isset($_POST['submit'])) {
@@ -13,9 +15,9 @@ if (isset($_POST['submit'])) {
         if ($email == 'admin' && $password == 'admin') {
             $_SESSION['login_admin'] = 'admin';
             header("location: ../index.php");
-         } else {
+        } else {
             echo "Wrong credentials! Please, try again!";
-         }
+        }
     }
 }
 ?>
