@@ -1,4 +1,5 @@
 <?php
+require_once('../inc/logout.php');
 session_start();
 $error = '';
 if (isset($_POST['submit'])) {

@@ -1,4 +1,5 @@
 <?php
+require_once('../inc/logout.php');
 require_once('auth/auth.php');
 session_start();
 $error = '';
