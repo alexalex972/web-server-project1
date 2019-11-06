@@ -17,6 +17,12 @@
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
 	$data = $sql->fetchAll();
+	if(isset($_SESSION['login_admin'])) {
+		$var = '<td><a href="edit_form.php?id=$i[pid]">Edit</a></td>';
+		
+	} else {
+		$var = '';
+	}
 	foreach ($data as $i)
 		echo <<<"CAT"
 	<tr>
@@ -29,6 +35,8 @@
 		<td>$i[number]</td>
 		<td>$i[price]</td>
 		<td>$i[desc]</td>
+		<td>$i[desc]</td>
+		$var
 	</tr>
 CAT;
 	?>
