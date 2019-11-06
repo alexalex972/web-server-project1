@@ -12,7 +12,7 @@ try {
     $query = "SELECT uid from users where email = '$email_check'";
     $ses_sql = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($ses_sql);
-    $login_session = $row['uid'];
+    $login_session = $row['email'];
 
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
