@@ -12,7 +12,7 @@
 	<th>Description</th>
 </tr>
 <?php
-	$conn=new PDO("mysql:host=db;dbname=trainsystem", 'user', 'test');
+	$conn=new PDO("mysql:host=localhost;dbname=trainsystem", 'root', '');
 	$sql=$conn->prepare("SELECT * FROM Catalogue");
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
