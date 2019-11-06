@@ -1,10 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "trainsystem";
-
+require_once('../auth/auth.php');
 try {
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

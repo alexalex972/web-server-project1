@@ -11,9 +11,11 @@
 	<th>Description</th>
 </tr>
 <?php
+	session_start();
 	$conn=new PDO("mysql:host=db;dbname=trainsystem", 'user', 'test');
 	$sql=$conn->prepare("SELECT * 
-FROM Cart INNER JOIN Catalogue ON(Cart.pid = Catalogue.pid)");
+FROM Cart INNER JOIN Catalogue ON(Cart.pid = Catalogue.pid) WHERE Cart.uid = ?");
+	$sql->bindValue(1,$_SESSION['login_user']);
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
 	$data=$sql->fetchAll();

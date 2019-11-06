@@ -15,14 +15,14 @@ if (isset($_POST['submit'])) {
          $email = $_POST['email'];
          $password = md5($_POST['password']);
 
-         $query = "SELECT uid, email, password from users where email=? AND password=? LIMIT 1";
+         $query = "SELECT uid, email, password from Users where email=? AND password=? LIMIT 1";
 
          $stmt = $conn->prepare($query);
          $stmt->bindParam(1, $email);
          $stmt->bindParam(2, $password);
          $stmt->execute();
-         if ($arr = $stmt->fetch(PDO::FETCH_ASSOC))
-            $_SESSION['login_user'] = $arr['uid'];
+         if($arr = $stmt->fetch(PDO::FETCH_ASSOC))
+			 $_SESSION['login_user'] = $arr['uid'];
 
 
          header("location: index.php");

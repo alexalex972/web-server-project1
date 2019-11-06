@@ -13,3 +13,5 @@ uid, pid, number
 #####Please check wheter dbtest.php works correctly
 
 #####Mysql user-> user, password -> test
+
+$_SESSION['priv']=1;
