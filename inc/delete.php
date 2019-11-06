@@ -1,4 +1,4 @@
-<form action='deletefunc.php' method='POST'>
+<form action='inc/deletefunc.php' method='POST'>
 <table class='table-striped table-hover'>
 <tr>
 	<th>Id</th>

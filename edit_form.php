@@ -6,7 +6,7 @@ $sql = $conn->prepare("SELECT * FROM Catalogue where pid='" . $id . "'");
 $sql->execute();
 $sql->setFetchMode(PDO::FETCH_ASSOC);
 $data = $sql->fetchAll();
-$data = $data[0];
+if($data) $data = $data[0];
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $data = $data[0];
             $update = "UPDATE Catalogue SET name='" . $name . "', dstart='" . $dstart . "', dfinish='" . $dfinish . "',
             tstart='" . $tstart . "', tfinish='" . $tfinish . "', number='" . $number . "', price='" . $price . "', 
             `desc`='" . $desc . "' WHERE pid='" . $id . "'";
-            echo $update;
+
             $conn->query($update);
             if($conn->query($update)){
 

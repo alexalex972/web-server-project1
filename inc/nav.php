@@ -20,9 +20,9 @@
 		echo "</ul>";
     } else if (isset($_SESSION['login_admin'])){
 		echo "<ul class='navbar-nav'>";
-		echo "<li class='nav-item'><a class='nav-link' href='add_item.php'>Add Item</a></li>";
-		echo "<li class='nav-item'><a class='nav-link' href='delete_item.php'>Delete Item</a></li>";
-		echo "<li class='nav-item'><a class='nav-link' href=''>Update Item</a></li>";
+		echo "<li class='nav-item'><a class='nav-link' href='./add_item.php'>Add Item</a></li>";
+		echo "<li class='nav-item'><a class='nav-link' href='./delete_item.php'>Delete Item</a></li>";
+		echo "<li class='nav-item'><a class='nav-link' href='./index.php'>Update Item</a></li>";
 		echo "</ul>";
 		echo "<ul class='navbar-nav ml-auto'>";
 		echo "<li class='nav-item'><a class='nav-link'>Hello, " . $_SESSION['login_admin'] . "</a></li>";

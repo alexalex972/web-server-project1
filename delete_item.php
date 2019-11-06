@@ -8,14 +8,14 @@ session_start();
   <title>Trains</title>
   <meta charset="utf-8">
 <?php
-	require_once('../inc/head.php');
+	require_once('inc/head.php');
 ?>
 </head>
 <body>
 <?php
-	require_once('../inc/jumbotron.php');
-	require_once('../inc/nav.php');
-    require_once('../inc/delete.php')
+	require_once('inc/jumbotron.php');
+	require_once('inc/nav.php');
+    require_once('inc/delete.php')
 ?>
 </body>
 </html> 

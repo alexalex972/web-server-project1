@@ -39,6 +39,6 @@ echo<<<"CAT"
 CAT;
 ?>
 </table>
-<input type='text' name='number' placeholder='input number of tickets'>
+<input type="number" name='number' required placeholder='input number of tickets' min="1" step="1"/>
 <input type='Submit' value='Add to cart'>
 </form>

@@ -1,6 +1,6 @@
 <?php
-$servername = "db";
-$username = "user";
-$password = "test";
+$servername = "localhost";
+$username = "root";
+$password = "";
 $dbname = "trainsystem";
 ?>

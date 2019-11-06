@@ -6,7 +6,7 @@ function test_input($data) {
     return $data;
 }
 
-require_once('../auth/auth.php');
+require_once('auth/auth.php');
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

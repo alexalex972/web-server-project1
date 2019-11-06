@@ -1,14 +1,14 @@
 <table class='table-striped table-hover'>
 	<tr>
-		<th>Id</th>
-		<th>Name</th>
-		<th>From</th>
-		<th>To</th>
-		<th>Departure time</th>
-		<th>Arrival time</th>
-		<th>Number of tockets left</th>
-		<th>Price</th>
-		<th>Description</th>
+		<th>Id </th>
+		<th>Name </th>
+		<th>From </th>
+		<th>To </th>
+		<th>Departure time </th>
+		<th>Arrival time </th>
+		<th># of tickets left </th>
+		<th>Price </th>
+		<th>Description </th>
 	</tr>
 	<?php
 	require_once('auth/auth.php');
@@ -17,13 +17,13 @@
 	$sql->execute();
 	$sql->setFetchMode(PDO::FETCH_ASSOC);
 	$data = $sql->fetchAll();
-	if(isset($_SESSION['login_admin'])) {
-		$var = '<td><a href="edit_form.php?id=$i[pid]">Edit</a></td>';
-		
-	} else {
-		$var = '';
-	}
-	foreach ($data as $i)
+
+	foreach ($data as $i) {
+		if (isset($_SESSION['login_admin'])) {
+			$var = "<td><a href='edit_form.php?id=$i[pid]'>Edit</a></td>";
+		} else {
+			$var = '';
+		}
 		echo <<<"CAT"
 	<tr>
 		<td>$i[pid]</td>
@@ -35,9 +35,9 @@
 		<td>$i[number]</td>
 		<td>$i[price]</td>
 		<td>$i[desc]</td>
-		<td>$i[desc]</td>
 		$var
 	</tr>
 CAT;
+	}
 	?>
 </table>
