@@ -1,4 +1,12 @@
 <?php
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 include("auth/auth.php");
 $id = $_REQUEST['id'];
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -23,17 +31,40 @@ if ($data) $data = $data[0];
     margin: 0 auto;">
         <?php
         $status = "";
+        $today = date("Y-m-d H:i:s");
         if (isset($_POST['new']) && $_POST['new'] == 1) {
-            $id = $_REQUEST['id'];
-            $name = $_REQUEST['name'];
-            $dstart = $_REQUEST['dstart'];
-            $dfinish = $_REQUEST['dfinish'];
-            $tstart = $_REQUEST['tstart'];
-            $tfinish = $_REQUEST['tfinish'];
-            $number = $_REQUEST['number'];
-            $price = $_REQUEST['price'];
-            $desc = $_REQUEST['desc'];
-            $update = "UPDATE Catalogue SET name=? , dstart=? , dfinish=?,
+            $id = test_input($_REQUEST['id']);
+            $name = test_input($_REQUEST['name']);
+            $dstart = test_input($_REQUEST['dstart']);
+            $dfinish = test_input($_REQUEST['dfinish']);
+            $tstart = test_input($_REQUEST['tstart']);
+            $tfinish = test_input($_REQUEST['tfinish']);
+            $number = test_input($_REQUEST['number']);
+            $price = test_input($_REQUEST['price']);
+            $desc = test_input($_REQUEST['desc']);
+
+            if ($tstart > $tfinish) {
+                $status = "Departure time is after arrival time.</br></br>
+                <button onclick='history.go(-1);' name='back' class='form-control btn btn-secondary'>Back</button>";
+            }
+        
+            if (!empty($tstart) && isset($tstart)) {
+                if ($tfinish < $today) {
+                    $status = "Departure cannot be set before today.</br></br>
+                    <button onclick='history.go(-1);' name='back' class='form-control btn btn-secondary'>Back</button>";
+                }
+            }
+        
+            if (!empty($tfinish) && isset($tfinish)) {
+                if ($tfinish < $today) {
+                    $status = "Arrival cannot be set before today.</br></br>
+                    <button onclick='history.go(-1);' name='back' class='form-control btn btn-secondary'>Back</button>";
+                }
+            }
+
+            if($status == "")
+            {
+                $update = "UPDATE Catalogue SET name=? , dstart=? , dfinish=?,
             tstart=?, tfinish=?, number=?, price=?, 
             `desc`=? WHERE pid='" . $id . "'";
 
@@ -53,6 +84,11 @@ if ($data) $data = $data[0];
                 echo '<p style="color: green; margin-top:30px">' . $status . '</p>';
                 $conn = null;
             }
+            } else {
+                
+                echo '<p style="color: red; margin-top:30px">' . $status . '</p>';
+            }
+            
         } else {
             ?> <h1 align="center" style="margin-top: 20px">UPDATE RECORD #<?php echo $data['pid']; ?></h1>
             <hr class="my-4">
