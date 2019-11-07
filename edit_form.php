@@ -33,16 +33,25 @@ if ($data) $data = $data[0];
             $number = $_REQUEST['number'];
             $price = $_REQUEST['price'];
             $desc = $_REQUEST['desc'];
-            $update = "UPDATE Catalogue SET name='" . $name . "', dstart='" . $dstart . "', dfinish='" . $dfinish . "',
-            tstart='" . $tstart . "', tfinish='" . $tfinish . "', number='" . $number . "', price='" . $price . "', 
-            `desc`='" . $desc . "' WHERE pid='" . $id . "'";
+            $update = "UPDATE Catalogue SET name=? , dstart=? , dfinish=?,
+            tstart=?, tfinish=?, number=?, price=?, 
+            `desc`=? WHERE pid='" . $id . "'";
 
-            $conn->query($update);
-            if ($conn->query($update)) {
-
+            $statement = $conn->prepare($update);
+            $statement->bindValue(1, $name);
+            $statement->bindValue(2, $dstart);
+            $statement->bindValue(3, $dfinish);
+            $statement->bindValue(4, $tstart);
+            $statement->bindValue(5, $tfinish);
+            $statement->bindValue(6, $number);
+            $statement->bindValue(7, $price);
+            $statement->bindValue(8, $desc);
+            $statement->execute();
+            if ($statement->execute()) {
                 $status = "Record Updated Successfully. </br></br>
                 <a href='index.php'>View Updated Record</a>";
                 echo '<p style="color: green; margin-top:30px">' . $status . '</p>';
+                $conn = null;
             }
         } else {
             ?> <h1 align="center" style="margin-top: 20px">UPDATE RECORD #<?php echo $data['pid']; ?></h1>
